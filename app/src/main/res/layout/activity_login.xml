@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/login"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="20dp"
+    android:background="@drawable/gradient_background">
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:contentDescription="Logo"
+        android:src="@drawable/logoprincipal" />
+
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/edittext_bg"
+        android:hint="Usuario"
+        android:padding="10dp"
+        android:textColor="@color/black"
+        android:textColorHint="#ff8750a4" />
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edittext_bg"
+        android:hint="Contraseña"
+        android:inputType="textPassword"
+        android:padding="10dp"
+        android:textColor="@color/black"
+        android:textColorHint="#ff8750a4" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="20dp">
+
+        <Button
+            android:id="@+id/loginBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Iniciar Sesión"
+            android:backgroundTint="#7D5A94"
+            android:textColor="#fff"
+            android:layout_marginEnd="10dp"/>
+
+        <Button
+            android:id="@+id/registerBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Registrar"
+            android:backgroundTint="#7D5A94"
+            android:textColor="#fff"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/forgotPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Recuperar Contraseña"
+        android:textColor="#00b894"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/errorMesage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="#F20707"
+        android:textSize="30sp" />
+</LinearLayout>

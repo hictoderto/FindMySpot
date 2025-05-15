@@ -1,0 +1,20 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Fondo de la barra -->
+    <item android:id="@android:id/background">
+        <shape android:shape="rectangle">
+            <solid android:color="#E2B7FF"/> <!-- color de fondo -->
+            <corners android:radius="10dp"/>
+        </shape>
+    </item>
+
+    <!-- Barra de progreso -->
+    <item android:id="@android:id/progress">
+        <clip>
+            <shape android:shape="rectangle">
+                <solid android:color="#684587"/> <!-- color del progreso -->
+                <corners android:radius="10dp"/>
+            </shape>
+        </clip>
+    </item>
+</layer-list>
