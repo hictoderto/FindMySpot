@@ -1,5 +1,6 @@
 package com.example.findmyspot;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,6 +12,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 
@@ -25,7 +29,7 @@ import okhttp3.Response;
 public class LoginScreen extends AppCompatActivity {
     private EditText username, password;
     private Button loginBtn, registerBtn;
-    private TextView forgotPassword;
+    private TextView forgotPassword,errorMesage;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +45,7 @@ public class LoginScreen extends AppCompatActivity {
         loginBtn = findViewById(R.id.loginBtn);
         registerBtn = findViewById(R.id.registerBtn);
         forgotPassword = findViewById(R.id.forgotPassword);
+        errorMesage = findViewById(R.id.errorMesage);
 
         loginBtn.setOnClickListener(v -> {
             String user = username.getText().toString();
@@ -51,13 +56,39 @@ public class LoginScreen extends AppCompatActivity {
         });
 
         registerBtn.setOnClickListener(v -> {
-            hacerPingServidor();
+            Intent intent = new Intent(LoginScreen.this, RegistroScreen.class);
+            startActivity(intent);
         });
 
 
         forgotPassword.setOnClickListener(v -> {
-            // Ir a recuperación de contraseña
         });
+        username.addTextChangedListener(new android.text.TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                errorMesage.setText(""); // Borra el mensaje de error cuando se escribe algo
+            }
+
+            @Override
+            public void afterTextChanged(android.text.Editable s) {}
+        });
+
+        password.addTextChangedListener(new android.text.TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                errorMesage.setText(""); // Borra el mensaje de error cuando se escribe algo
+            }
+
+            @Override
+            public void afterTextChanged(android.text.Editable s) {}
+        });
+
     }
     public void hacerLogin(String usuario, String password) {
         OkHttpClient client = new OkHttpClient();
@@ -85,48 +116,40 @@ public class LoginScreen extends AppCompatActivity {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 if (response.isSuccessful()) {
-                    String respuesta = response.body().string();
+                    try {
+                        String respuesta = response.body().string();
 
-                    // Aquí puedes parsear la respuesta JSON si quieres
+                        JSONObject json = new JSONObject(respuesta);
+                        boolean success = json.getBoolean("success");
 
-                    runOnUiThread(() -> Toast.makeText(getApplicationContext(), "Login exitoso", Toast.LENGTH_SHORT).show());
-                    runOnUiThread(() -> Toast.makeText(getApplicationContext(), respuesta, Toast.LENGTH_SHORT).show());
-                    // Por ejemplo, abrir otra actividad
+                        if (success) {
+                            String mensaje = json.getString("message");
+                            JSONObject user = json.getJSONObject("user");
+                            String nombre = user.getString("nombre");
+
+                            runOnUiThread(() -> {
+                                Toast.makeText(getApplicationContext(), "Bienvenido, " + nombre, Toast.LENGTH_SHORT).show();
+                                // Ir a otra pantalla, por ejemplo:
+                                // startActivity(new Intent(context, MainActivity.class));
+                            });
+                        } else {
+                            runOnUiThread(() -> {
+                                errorMesage.setText("Usuario o contraseña incorrectos");
+                            });
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        runOnUiThread(() -> Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show());
+                    }
+
                 } else {
-                    runOnUiThread(() -> Toast.makeText(getApplicationContext(), "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show());
+                    runOnUiThread(() -> errorMesage.setText( "Usuario o contraseña incorrectos"));
+
                 }
             }
         });
     }
-    public void hacerPingServidor() {
-        OkHttpClient client = new OkHttpClient();
 
-        Request request = new Request.Builder()
-                .url("http://192.168.1.101:4000/") // La ruta raíz de tu API Flask
-                .get()
-                .build();
-
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                runOnUiThread(() ->
-                        Toast.makeText(getApplicationContext(), "Error:"+e, Toast.LENGTH_SHORT).show());
-                        System.out.println(e);
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                if (response.isSuccessful()) {
-                    String respuesta = response.body().string();
-                    runOnUiThread(() ->
-                            Toast.makeText(getApplicationContext(), "Respuesta del servidor: " + respuesta, Toast.LENGTH_LONG).show());
-                } else {
-                    runOnUiThread(() ->
-                            Toast.makeText(getApplicationContext(), "Error en la respuesta del servidor", Toast.LENGTH_SHORT).show());
-                }
-            }
-        });
-    }
 
 
 }

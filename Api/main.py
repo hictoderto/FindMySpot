@@ -81,8 +81,9 @@ def login():
 
         # Opcionalmente puedes omitir la imagen del perfil para no sobrecargar
         return jsonify({
+            "success":True,
             "message": "Login exitoso",
-            "usuario": {
+            "user": {
                 "codigo": usuario.codigo,
                 "nombre": usuario.nombre,
                 "apellidos": usuario.apellidos,
