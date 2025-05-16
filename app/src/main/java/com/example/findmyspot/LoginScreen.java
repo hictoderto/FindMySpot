@@ -33,6 +33,16 @@ public class LoginScreen extends AppCompatActivity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        boolean isLoggedIn = getSharedPreferences("session", MODE_PRIVATE)
+                .getBoolean("isLoggedIn", false);
+
+        if (isLoggedIn) {
+            // Ir directo a la pantalla principal
+            Intent intent = new Intent(LoginScreen.this, PrincipalSecreen.class);
+            startActivity(intent);
+            finish(); // Cierra esta pantalla
+            return;
+        }
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.login), (v, insets) -> {
@@ -58,6 +68,7 @@ public class LoginScreen extends AppCompatActivity {
         registerBtn.setOnClickListener(v -> {
             Intent intent = new Intent(LoginScreen.this, RegistroScreen.class);
             startActivity(intent);
+
         });
 
 
@@ -123,14 +134,30 @@ public class LoginScreen extends AppCompatActivity {
                         boolean success = json.getBoolean("success");
 
                         if (success) {
-                            String mensaje = json.getString("message");
                             JSONObject user = json.getJSONObject("user");
                             String nombre = user.getString("nombre");
+                            String id = user.getString("codigo");
+                            String imagen = user.getString("imagen");
+                            String apellidos = user.getString("apellidos");
+                            String telefono = user.getString("telefono");
+                            String correo = user.getString("correo");
+
+                            getSharedPreferences("session", MODE_PRIVATE)
+                                    .edit()
+                                    .putBoolean("isLoggedIn", true)
+                                    .putString("nombreUsuario", nombre)
+                                    .putString("id",id)
+                                    .putString("imagen",imagen)
+                                    .putString("apellidos",apellidos)
+                                    .putString("telefono",telefono)
+                                    .putString("correo",correo)
+                                    .apply();
+
 
                             runOnUiThread(() -> {
-                                Toast.makeText(getApplicationContext(), "Bienvenido, " + nombre, Toast.LENGTH_SHORT).show();
-                                // Ir a otra pantalla, por ejemplo:
-                                // startActivity(new Intent(context, MainActivity.class));
+                                Intent intent = new Intent(LoginScreen.this, PrincipalSecreen.class);
+                                startActivity(intent);
+                                finish();
                             });
                         } else {
                             runOnUiThread(() -> {

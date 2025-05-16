@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from sqlalchemy.orm import sessionmaker
 from Connexion import engine
-from OBJS import Usuario, Base  # Si definiste la clase Usuario en models.py
+from OBJS import Usuario,Lugar, Base  # Si definiste la clase Usuario en models.py
 
 app = Flask(__name__)
 CORS(app)
@@ -27,6 +27,7 @@ def crear_usuario():
         apellidos = request.form.get('apellidos')
         telefono = request.form.get('telefono')
         correo = request.form.get('correo')
+        
 
         if not all([codigo, password, nombre, apellidos, correo]):
             return jsonify({"error": "Faltan campos obligatorios"}), 400
@@ -40,9 +41,8 @@ def crear_usuario():
             return jsonify({"error": "El usuario ya existe"}), 409
 
         # Imagen (opcional)
-        imagen = request.files.get('imagen_perfil')
+        imagen = request.files.get('imagen')
         imagen_bin = imagen.read() if imagen else None
-
         nuevo_usuario = Usuario(
             codigo=int(codigo),
             password=password,
@@ -56,10 +56,14 @@ def crear_usuario():
         session.add(nuevo_usuario)
         session.commit()
 
-        return jsonify({"message": "Usuario creado con imagen correctamente"}), 201
+        return jsonify({
+                        "success":True,
+                        "message": "Usuario creado con imagen correctamente",
+                        "user":nuevo_usuario.to_dict()}), 201
 
     except Exception as e:
         session.rollback()
+        print(e)
         return jsonify({"error": str(e)}), 500
     finally:
         session.close()
@@ -83,18 +87,64 @@ def login():
         return jsonify({
             "success":True,
             "message": "Login exitoso",
-            "user": {
-                "codigo": usuario.codigo,
-                "nombre": usuario.nombre,
-                "apellidos": usuario.apellidos,
-                "correo": usuario.correo,
-                "telefono": usuario.telefono
-            }
+            "user": usuario.to_dict()
         }), 200
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+    finally:
+        session.close()
+@app.route('/lugares', methods=['GET'])
+def obtener_lugares():
+    session = Session()
+    try:
+        lugares = session.query(Lugar).all()
+        lugar_list = [lugar.to_dict() for lugar in lugares]
+
+
+        return jsonify({
+            "success":True,
+            "message": "consulta exitosa",
+            "lugares": lugar_list
+        }), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    finally:
+        session.close()
+@app.route('/lugar', methods=['POST'])
+def crear_lugar():
+    session = Session()
+    try:
+        nombre = request.form.get('nombre')
+        capacidad = request.form.get('capacidad')
+        tipo_lugar = request.form.get('tipo_lugar')
+        imagen_file = request.files.get('imagen')
+
+        if not all([nombre, capacidad, tipo_lugar]):
+            return jsonify({"error": "Faltan campos obligatorios"}), 400
+
+        imagen_bin = imagen_file.read() if imagen_file else None
+
+        nuevo_lugar = Lugar(
+            nombre=nombre,
+            capacidad=int(capacidad),
+            tipo_lugar=tipo_lugar,
+            imagen=imagen_bin
+        )
+
+        session.add(nuevo_lugar)
+        session.commit()
+
+        return jsonify({
+            "success": True,
+            "message": "Lugar creado correctamente",
+            "lugar": nuevo_lugar.to_dict()
+        }), 201
+
+    except Exception as e:
+        session.rollback()
+        return jsonify({"error": str(e)}), 500
     finally:
         session.close()
 
