@@ -112,6 +112,60 @@ def obtener_lugares():
         return jsonify({"error": str(e)}), 500
     finally:
         session.close()
+@app.route('/usuario/<int:codigo>', methods=['PUT'])
+def actualizar_usuario(codigo):
+    session = Session()
+    try:
+        # Buscar el usuario por código
+        usuario = session.query(Usuario).filter_by(codigo=codigo).first()
+
+        if not usuario:
+            return jsonify({"error": "Usuario no encontrado"}), 404
+
+        # Obtener nuevos datos del formulario (solo se actualiza si se envía)
+        password = request.form.get('password')
+        nombre = request.form.get('nombre')
+        apellidos = request.form.get('apellidos')
+        telefono = request.form.get('telefono')
+        correo = request.form.get('correo')
+        imagen = request.files.get('imagen')
+
+        if password:
+            usuario.password = password
+        if nombre:
+            usuario.nombre = nombre
+        if apellidos:
+            usuario.apellidos = apellidos
+        if telefono:
+            usuario.telefono = telefono
+        if correo:
+            # Verificar si el correo ya lo usa otro usuario
+            existe_correo = session.query(Usuario).filter(
+                Usuario.correo == correo,
+                Usuario.codigo != codigo
+            ).first()
+            if existe_correo:
+                return jsonify({"error": "Este correo ya está en uso por otro usuario"}), 409
+            usuario.correo = correo
+
+        if imagen:
+            usuario.imagen_perfil = imagen.read()
+
+        session.commit()
+        return jsonify({
+            "success": True,
+            "message": "Usuario actualizado correctamente",
+            "user": usuario.to_dict()
+        }), 200
+
+    except Exception as e:
+        session.rollback()
+        print(e)
+        return jsonify({"error": str(e)}), 500
+    finally:
+        session.close()
+
+
 @app.route('/lugar', methods=['POST'])
 def crear_lugar():
     session = Session()

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/drawer_layout"
+    android:id="@+id/drawer_layoutver"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_background">
@@ -16,60 +16,101 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_gravity="center"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="20dp"
             android:contentDescription="Imagen de perfil"
             android:padding="6dp"
             android:scaleType="centerCrop" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:paddingLeft="35dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textSize="20dp"
+            android:text="Codigo:" />
+
         <EditText
             android:id="@+id/codigover"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="40dp"
-            android:layout_marginTop="30dp"
             android:background="@drawable/edittext_bg"
             android:padding="10dp"
             android:textColor="@color/black"
             android:textColorHint="#ff8750a4" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textSize="20dp"
+            android:paddingLeft="35dp"
+            android:text="Nombre:" />
 
         <EditText
             android:id="@+id/nombrever"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="40dp"
-            android:layout_marginTop="20dp"
             android:background="@drawable/edittext_bg"
             android:padding="10dp"
             android:textColor="@color/black"
             android:textColorHint="#ff8750a4" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textSize="20dp"
+            android:paddingLeft="35dp"
+            android:text="Apellidos:" />
 
         <EditText
             android:id="@+id/apellidosver"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="40dp"
-            android:layout_marginTop="20dp"
             android:background="@drawable/edittext_bg"
             android:padding="10dp"
             android:textColor="@color/black"
             android:textColorHint="#ff8750a4" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textSize="20dp"
+            android:paddingLeft="35dp"
+            android:text="Telefono:" />
 
         <EditText
             android:id="@+id/telefonover"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="40dp"
-            android:layout_marginTop="20dp"
             android:background="@drawable/edittext_bg"
             android:padding="10dp"
             android:textColor="@color/black"
             android:textColorHint="#ff8750a4" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textSize="20dp"
+            android:paddingLeft="35dp"
+            android:text="Correo:" />
 
         <EditText
             android:id="@+id/correover"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="40dp"
-            android:layout_marginTop="20dp"
             android:background="@drawable/edittext_bg"
             android:padding="10dp"
             android:textColor="@color/black"
@@ -77,9 +118,9 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="40dp"
             android:layout_marginHorizontal="40dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="20dp"
             android:orientation="horizontal">
 
             <Button
@@ -147,8 +188,8 @@
     </LinearLayout>
 
     <com.google.android.material.navigation.NavigationView
-        android:id="@+id/nav_view"
-        android:layout_width="140dp"
+        android:id="@+id/nav_viewver"
+        android:layout_width="200dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:background="#0a5896"

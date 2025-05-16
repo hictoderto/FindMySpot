@@ -114,7 +114,7 @@ public class RegistroScreen extends AppCompatActivity {
         RequestBody requestBody = multipartBuilder.build();
 
         Request request = new Request.Builder()
-                .url("http://192.168.1.101:4000/usuario")  // Cambia la URL
+                .url(Constatnts.URL+"/usuario")  // Cambia la URL
                 .post(requestBody)
                 .build();
         client.newCall(request).enqueue(new Callback() {

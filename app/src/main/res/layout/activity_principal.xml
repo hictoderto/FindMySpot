@@ -36,7 +36,7 @@
         <LinearLayout
             android:id="@+id/footer"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="60dp"
             android:orientation="horizontal"
             android:background="#5e88f6"
             android:gravity="center">
@@ -61,22 +61,27 @@
                 android:textSize="30sp"
                 android:textColor="@android:color/white" />
 
-            <ImageView
-                android:id="@+id/profile_image"
+            <FrameLayout
+                android:id="@+id/view_container"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_gravity="center"
-                android:scaleType="centerCrop"
-                android:padding="6dp"
-                android:contentDescription="Imagen de perfil" />
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/profile_image"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="Imagen de perfil"
+                    android:scaleType="centerCrop" />
+            </FrameLayout>
         </LinearLayout>
     </LinearLayout>
 
     <!-- Menú lateral -->
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
-        android:layout_width="280dp"
+        android:layout_width="200dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:menu="@menu/drawer_menu"

@@ -119,7 +119,7 @@ public class PrincipalSecreen extends AppCompatActivity {
 
     private void cargarLugaresDesdeAPI() {
         Request request = new Request.Builder()
-                .url("http://192.168.1.101:4000/lugares")
+                .url(Constatnts.URL+"/lugares")
                 .build();
 
         client.newCall(request).enqueue(new Callback() {
