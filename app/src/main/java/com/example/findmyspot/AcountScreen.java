@@ -152,7 +152,8 @@ public class AcountScreen extends AppCompatActivity {
                 Toast.makeText(AcountScreen.this, "busqueda seleccionado", Toast.LENGTH_SHORT).show();
                 // Aquí puedes hacer navegación, etc.
             } else if (id == R.id.nav_cancel) {
-                Toast.makeText(AcountScreen.this, "cancelar seleccionado", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(AcountScreen.this, BuscarReservacionActivity.class);
+                startActivity(intent);
             } else if (id == R.id.nav_about_us) {
                 Toast.makeText(AcountScreen.this, "nosotros seleccionada", Toast.LENGTH_SHORT).show();
             }
