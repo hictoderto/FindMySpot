@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imageViewLogo"
+            android:layout_width="380dp"
+            android:layout_height="90dp"
+            android:layout_gravity="center"
+            android:src="@drawable/logoprincipal" />
+
+        <EditText
+            android:id="@+id/editTextNombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/edittext_bg"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:textColorHint="#ff8750a4" />
+        <EditText
+            android:id="@+id/editPlacName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/edittext_bg"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:textColorHint="#ff8750a4" />
+
+
+        <!-- Botón y texto para seleccionar la fecha -->
+        <Button
+            android:id="@+id/buttonFecha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Seleccionar Fecha"
+            android:background="@drawable/edittext_bg"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:id="@+id/textViewFechaSeleccionada"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Fecha no seleccionada"
+            android:textColor="@android:color/black" />
+
+        <!-- Botón y texto para seleccionar la hora -->
+        <Button
+            android:id="@+id/buttonHora"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Seleccionar Hora"
+            android:background="@drawable/edittext_bg"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:id="@+id/textViewHoraSeleccionada"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Hora no seleccionada"
+            android:textColor="@android:color/black" />
+
+        <EditText
+            android:id="@+id/editTextEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="e-mail institucional"
+            android:background="@drawable/edittext_bg"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:textColorHint="#ff8750a4" />
+
+        <CheckBox
+            android:id="@+id/checkboxTerminos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Acepto los términos y condiciones."
+            android:textColor="@android:color/black" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="16dp">
+
+            <Button
+                android:id="@+id/btnRegresar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Regresar" />
+
+            <Button
+                android:id="@+id/btnContinuar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Continuar" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

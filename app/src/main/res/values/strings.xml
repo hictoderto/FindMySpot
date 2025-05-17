@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">FindMySpot</string>
+    <string-array name="opciones_edificio">
+        <item>Seleccionar</item>
+        <item>Edificio A</item>
+        <item>Edificio B</item>
+        <item>Edificio C</item>
+    </string-array>
+
+    <string-array name="opciones_aula">
+        <item>Seleccionar</item>
+        <item>Aula 101</item>
+        <item>Aula 102</item>
+        <item>Aula 103</item>
+    </string-array>
 </resources>

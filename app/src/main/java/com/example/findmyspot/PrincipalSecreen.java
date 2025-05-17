@@ -160,7 +160,7 @@ public class PrincipalSecreen extends AppCompatActivity {
                 JSONArray array = jsonA.getJSONArray("lugares");
                 for (int i = 0; i < array.length(); i++) {
                     JSONObject obj = array.getJSONObject(i);
-
+                    int id = obj.getInt("id_lugar");
                     String nombre = obj.getString("nombre");
                     String tipo = obj.getString("tipo_lugar");
                     int capacidad = obj.getInt("capacidad");
@@ -180,6 +180,12 @@ public class PrincipalSecreen extends AppCompatActivity {
                     sub1.setText(tipo);
                     sub2.setText("1000/" + capacidad);
                     imagen.setImageBitmap(imagenBitmap);
+
+                    itemView.setOnClickListener(v -> {
+                        Intent intent = new Intent(PrincipalSecreen.this, InformationScreen.class);
+                        intent.putExtra("id",id);
+                        startActivity(intent);
+                    });
 
                     container.addView(itemView);
                 }

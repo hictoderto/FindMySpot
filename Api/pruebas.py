@@ -32,7 +32,7 @@ datos = {
 
 respuesta = requests.post(url, json=datos)
 print(respuesta.json())"""
-import requests
+"""import requests
 
 # URL de tu endpoint para crear un lugar
 url = "http://localhost:4000/lugar"
@@ -54,6 +54,36 @@ response = requests.post(url, data=data, files=files)
 
 # Imprimir resultado
 print("Código de respuesta:", response.status_code)
-print("Respuesta del servidor:", response.json())
+print("Respuesta del servidor:", response.json())"""
+"""import requests
+
+url = 'http://localhost:4000/regla'  # Cambia por la URL correcta si es necesario
+
+data = {
+    'nombre': 'Regla7',
+    'descripcion': 'Descripcion de la regla',
+    'enfuncion': True,
+    'responsable': 'alumno'
+}
+
+response = requests.post(url, data=data)
+
+print(response.status_code)
+print(response.json())"""
+import requests
+
+url = 'http://localhost:4000/asociar-regla'  # Cambia por la URL correcta si es necesario
+for i in range (0,8):
+    for j in range (0,8):   
+        data = {
+        'id_lugar': i,
+        'id_regla': j,
+        }
+        response = requests.post(url, data=data)
+
+        print(response.status_code)
+        print(response.json())
+
+
 
 
